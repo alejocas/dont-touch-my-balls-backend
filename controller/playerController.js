@@ -1,31 +1,27 @@
 const { BROADCAST_EVENTS } = require('../constants');
-const { io } = require('../app');
+const { io } = require('./controllerOrchestrator');
 const { players } = require('../data/playerDao')
 const { PLAYER_ADDITION } = BROADCAST_EVENTS;
 
-function addPlayer({ name }){
-    let connected = false;
+function addPlayer({ name }) {
+    let connected = true;
+    const responseObject = {
+        connected
+    };
     try {
         players[name] // Trying to generate an exception, if not, then player exists
-        io.emit(PLAYER_ADDITION, {
-            connected: false,
-            error: {
-                code: 1,
-                message: `El nombre ${name} ya ha sido seleccionado`
-            }
-        })
+        responseObject['connected'] = false;
+        responseObject['error'] = {
+            code: 1,
+            message: `El nombre ${name} ya ha sido seleccionado`
+        };
     } catch (error) {
         players[name] = {
             score: 10
-        }
-        io.emit(PLAYER_ADDITION, {
-            connected: true
-        });
+        };
+    } finally {
+        io.emit(PLAYER_ADDITION, responseObject);
     }
-}
-
-function updateScore(){
-
 }
 
 module.exports = {
