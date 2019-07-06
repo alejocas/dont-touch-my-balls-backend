@@ -24,6 +24,10 @@ function addPlayer({ name }){
     }
 }
 
+function updateScore(){
+    
+}
+
 module.exports = {
     addPlayer
 }
