@@ -1,5 +1,5 @@
 const { BROADCAST_EVENTS } = require('../constants');
-const { io } = require('../server');
+const { io } = require('../app');
 const { players } = require('../data/playerDao')
 const { PLAYER_ADDITION } = BROADCAST_EVENTS;
 
@@ -25,7 +25,7 @@ function addPlayer({ name }){
 }
 
 function updateScore(){
-    
+
 }
 
 module.exports = {

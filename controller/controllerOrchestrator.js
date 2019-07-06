@@ -1,5 +1,8 @@
+const { server } = require('../app');
+const { ioLib } = require('../libraries');
 const { RECEPTION_EVENTS } = require('../constants');
 const { addPlayer } = require('./playerController');
+const io = ioLib(server);
 
 const { CAPTURE_ATTEMPT, PLAYER_CONNECTION } = RECEPTION_EVENTS;
 
@@ -9,6 +12,4 @@ function orchest(socket) {
     socket.on(CAPTURE_ATTEMPT)
 }
 
-module.exports = {
-    orchest
-}
+io.on('connection', orchest);
