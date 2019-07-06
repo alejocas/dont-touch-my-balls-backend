@@ -1,19 +1,11 @@
 const app = require('express')();
-const http = require('http').createServer(app);
-const io = require('socket.io')(http);
-const PORT = 3000;
-
-app.get('/', (req, res) => {
-    res.sendFile(__dirname + '/web/index.html');
-});
+const { PORT } = require('./constants');
+const server = app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+const io = require('socket.io')(server);
 
 io.on('connection', (socket) => {
-    console.log('A user connected');
-    socket.on('disconnect', () => {
-        console.log('User disconnected');
+    console.log(socket.id);
+    socket.on('SEND_MESSAGE', (data) => {
+        io.emit('MESSAGE', data)
     });
 });
-
-http.listen(PORT, () => {
-    console.log(`Listening on *:${PORT}`);
-})
