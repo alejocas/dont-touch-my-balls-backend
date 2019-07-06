@@ -1,5 +1,13 @@
-const PORT = 3000;
+const PORT = 3001;
+const BROADCAST_EVENTS = {
+    PLAYER_ADDITION: 'PLAYER_ADDITION'
+};
+const RECEPTION_EVENTS = {
+    PLAYER_CONNECTION: 'PLAYER_CONNECTION'
+};
 
 module.exports = {
+    BROADCAST_EVENTS,
+    RECEPTION_EVENTS,
     PORT
-}
+};
