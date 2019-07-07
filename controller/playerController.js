@@ -1,5 +1,5 @@
 const { BROADCAST_EVENTS } = require('../constants');
-const { io } = require('./controllerOrchestrator');
+const { io } = require('../app');
 const { players } = require('../data/playerDao')
 const { PLAYER_ADDITION } = BROADCAST_EVENTS;
 

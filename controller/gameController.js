@@ -1,5 +1,5 @@
 const { BROADCAST_EVENTS } = require('../constants');
-const { io } = require('./controllerOrchestrator');
+const { io } = require('../app');
 const { players } = require('../data/playerDao')
 const { CAPTURE_RESULT, LOG_INFO, PLAYER_UPDATE_SCORE } = BROADCAST_EVENTS;
 
