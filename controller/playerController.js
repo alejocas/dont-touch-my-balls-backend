@@ -34,7 +34,9 @@ function getPlayerList(){
             name: player
         });
     }
-    return playerList;
+    return {
+        players: playerList
+    };
 }
 
 module.exports = {
