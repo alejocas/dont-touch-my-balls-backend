@@ -27,6 +27,17 @@ function addPlayer({ name }) {
     return responseObject;
 }
 
+function getPlayerList(){
+    const playerList = [];
+    for (const player in players) {
+        playerList.push({
+            name: player
+        });
+    }
+    return playerList;
+}
+
 module.exports = {
-    addPlayer
+    addPlayer,
+    getPlayerList
 }
