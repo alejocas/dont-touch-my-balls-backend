@@ -1,7 +1,4 @@
-const { BROADCAST_EVENTS } = require('../constants');
-const { io } = require('../app');
-const { players } = require('../data/playerDao')
-const { CAPTURE_RESULT, LOG_INFO, PLAYER_UPDATE_SCORE } = BROADCAST_EVENTS;
+const { players } = require('../data/playerDao');
 
 function captureAttempt({ attacker, attacked, successfulAttack }) {
     const successfulAttackMessage = `El jugador ${attacker} ha atacado satisfactoriamente al jugador ${attacked}`;
@@ -21,20 +18,23 @@ function captureAttempt({ attacker, attacked, successfulAttack }) {
             score: players[player].score
         });
     }
-    io.emit(CAPTURE_RESULT, {
-        attacker: {
-            earnedPoints: pointsAtStake
+    const responseObject = {
+        CAPTURE_RESULT: {
+            attacker: {
+                earnedPoints: pointsAtStake
+            },
+            attacked: {
+                lostPoints: pointsAtStake
+            }
         },
-        attacked: {
-            lostPoints: pointsAtStake
+        LOG_INFO: {
+            message: battleInfo
+        },
+        PLAYER_UPDATE_SCORE: {
+            scoreList: globalScoreList
         }
-    });
-    io.emit(LOG_INFO, {
-        message: battleInfo
-    });
-    io.emit(PLAYER_UPDATE_SCORE, {
-        scoreList: globalScoreList
-    })
+    };
+    return responseObject;
 }
 
 module.exports = {
