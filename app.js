@@ -6,8 +6,3 @@ const server = app.listen(PORT, () => console.log(`Server running on port ${PORT
 const io = ioLib(server);
 
 io.on('connection', orchest);
-
-// This is an unusual practice, but at the moment is required due to socket.io's needs
-module.exports = {
-    server
-}
