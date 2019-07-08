@@ -7,13 +7,21 @@ function addPlayer({ name }) {
             connected = false;
         }
     }
-    const responseObject = connected ? {
-        connected
-    } : {
-        connected,
-        error: {
-            code: 1,
-            message: `El nombre ${name} ya ha sido seleccionado`
+    let responseObject = {}
+    if (connected) {
+        players[name] = {
+            score: 10
+        }
+        responseObject = {
+            connected
+        }
+    } else {
+        responseObject = {
+            connected,
+            error: {
+                code: 1,
+                message: `El nombre ${name} ya ha sido seleccionado`
+            }
         }
     }
     return responseObject;
