@@ -2,7 +2,7 @@ const { BROADCAST_EVENTS, RECEPTION_EVENTS } = require('../constants');
 const { addPlayer, getPlayerList } = require('./playerController');
 const { captureAttempt } = require('./gameController');
 
-const { CAPTURE_RESULT, LOG_INFO, PLAYER_ADDITION, PLAYER_LIST, PLAYER_UPDATE_SCORE } = BROADCAST_EVENTS;
+const { CAPTURE_RESULT, LOG_INFO, PLAYER_ADDITION, PLAYER_LIST } = BROADCAST_EVENTS;
 const { CAPTURE_ATTEMPT, PLAYER_CONNECTION } = RECEPTION_EVENTS;
 
 function emitEventToAll(socket, event, payload) {
@@ -16,7 +16,7 @@ function orchest(socket) {
         const { captureResult, logInfo, playerUpdateScore } = captureAttempt(data);
         emitEventToAll(socket, CAPTURE_RESULT, captureResult);
         emitEventToAll(socket, LOG_INFO, logInfo);
-        emitEventToAll(socket, PLAYER_UPDATE_SCORE, playerUpdateScore);
+        emitEventToAll(socket, PLAYER_LIST, { players: playerUpdateScore.scoreList });
     });
     socket.on(PLAYER_CONNECTION, (data) => {
         const addPlayerResponse = addPlayer(data)
