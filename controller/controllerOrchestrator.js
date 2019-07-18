@@ -12,6 +12,12 @@ function emitEventToAll(socket, event, payload) {
 
 function orchest(socket) {
     console.log(socket.id);
+    socket.on(CAPTURE_ATTEMPT, (data) => {
+        const { captureResult, logInfo, playerUpdateScore } = captureAttempt(data);
+        emitEventToAll(socket, CAPTURE_RESULT, captureResult);
+        emitEventToAll(socket, LOG_INFO, logInfo);
+        emitEventToAll(socket, PLAYER_UPDATE_SCORE, playerUpdateScore);
+    });
     socket.on(PLAYER_CONNECTION, (data) => {
         const addPlayerResponse = addPlayer(data)
         socket.emit(PLAYER_ADDITION, addPlayerResponse);
@@ -23,12 +29,6 @@ function orchest(socket) {
             emitEventToAll(socket, PLAYER_LIST, playersInGame);
             emitEventToAll(socket, LOG_INFO, logInfoAboutPlayer);
         }
-    });
-    socket.on(CAPTURE_ATTEMPT, (data) => {
-        const answer = captureAttempt(data);
-        emitEventToAll(socket, CAPTURE_RESULT, answer.CAPTURE_RESULT);
-        emitEventToAll(socket, LOG_INFO, answer.LOG_INFO);
-        emitEventToAll(socket, PLAYER_UPDATE_SCORE, answer.PLAYER_UPDATE_SCORE);
     });
 }
 

@@ -31,7 +31,8 @@ function getPlayerList(){
     const playerList = [];
     for (const player in players) {
         playerList.push({
-            name: player
+            name: player,
+            score: players[player].score
         });
     }
     return {

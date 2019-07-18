@@ -19,7 +19,7 @@ function captureAttempt({ attacker, attacked, successfulAttack }) {
         });
     }
     const responseObject = {
-        CAPTURE_RESULT: {
+        captureResult: {
             attacker: {
                 earnedPoints: pointsAtStake
             },
@@ -27,10 +27,10 @@ function captureAttempt({ attacker, attacked, successfulAttack }) {
                 lostPoints: pointsAtStake
             }
         },
-        LOG_INFO: {
+        logInfo: {
             message: battleInfo
         },
-        PLAYER_UPDATE_SCORE: {
+        playerUpdateScore: {
             scoreList: globalScoreList
         }
     };
