@@ -1,4 +1,4 @@
-# ws-chat
+# Don't touch my balls - Backend
 POC: WebSockets with Node.
 
 ## Configure the project in your machine
