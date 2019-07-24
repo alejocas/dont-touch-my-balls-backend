@@ -1,4 +1,4 @@
-const PORT = 3001;
+const PORT = 5000;
 const BROADCAST_EVENTS = {
     CAPTURE_RESULT: 'CAPTURE_RESULT',
     LOG_INFO: 'LOG_INFO',
